@@ -69,6 +69,11 @@ public class HuidOnlineExport extends JPanel
 
         //Create a file chooser
         fc = new JFileChooser();
+
+        File currentDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Excel");
+        System.out.println(currentDir.getAbsolutePath());
+        fc.setCurrentDirectory
+                (currentDir);
         FileFilter allFilter = new FileTypeFilter(".", "Alle bestanden");
 
         FileFilter xlsFilter = new FileTypeFilter(".xls", "MS Excel");
@@ -80,24 +85,10 @@ public class HuidOnlineExport extends JPanel
         fc.addChoosableFileFilter(xlsFilter);
         fc.addChoosableFileFilter(xlsmFilter);
         fc.addChoosableFileFilter(xlsxFilter);
-        //Uncomment one of the following lines to try a different
-        //file selection mode.  The first allows just directories
-        //to be selected (and, at least in the Java look and feel,
-        //shown).  The second allows both files and directories
-        //to be selected.  If you leave these lines commented out,
-        //then the default mode (FILES_ONLY) will be used.
-        //
-        //fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-
-        //Create the open button.  We use the image from the JLF
-        //Graphics Repository (but we extracted it from the jar).
         openButton = new JButton("Open Excel...",
                                  createImageIcon("images/Open16.gif"));
         openButton.addActionListener(this);
 
-        //Create the save button.  We use the image from the JLF
-        //Graphics Repository (but we extracted it from the jar).
         saveButton = new JButton("Export for Vichy ....",
                                  createImageIcon("images/Save16.gif"));
         saveButton.addActionListener(this);
