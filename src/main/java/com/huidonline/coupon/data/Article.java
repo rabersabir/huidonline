@@ -12,8 +12,6 @@ public class Article {
     private final BigDecimal price;
 
     public Article(final String code, final String name, final BigDecimal price) {
-        System.out.println(" code :"+ code);
-        System.out.println(" name :" + name);
         this.code = code;
         this.name = name;
         this.price = price;
@@ -26,7 +24,6 @@ public class Article {
 
 
     public String getName() {
-        System.out.println(" getname :"+ name);
         return name;
     }
 

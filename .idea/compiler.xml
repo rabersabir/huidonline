@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="ExcelReader" />
+        <module name="HuidOnlineTool" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ExcelReader" target="1.5" />
+      <module name="HuidOnlineTool" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

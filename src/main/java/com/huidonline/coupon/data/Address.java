@@ -14,7 +14,7 @@ public class Address {
     @Override
     public String toString() {
         return getStreet() + " " + getHouseNumber() + " " + getPostalCode() + " " + getCity() + " " +
-                " " + getCountry() + '\'';
+                " " + getCountry() ;
     }
 
     public String getHouseNumber() {

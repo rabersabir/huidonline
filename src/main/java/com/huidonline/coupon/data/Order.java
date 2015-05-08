@@ -51,17 +51,6 @@ public class Order {
          articles.add(article);
     }
 
-    @Override
-    public String toString() {
-        return "com.huidonline.coupon.data.Order{" +
-                "orderId='" + orderId + '\'' +
-                ", factuurId='" + factuurId + '\'' +
-                ", customer=" + customer +
-                ", date=" + date +
-                ", total=" + total +
-                ", articles=" + articles +
-                '}';
-    }
 
     public String getOrderId() {
         return orderId;
@@ -101,7 +90,6 @@ public class Order {
         StringBuilder stringBuffer = new StringBuilder();
         for (Article article : articles) {
 
-            System.out.println(" article :"+ article.getName() ) ;
             stringBuffer.append(article.getName()+" ");
 
         }

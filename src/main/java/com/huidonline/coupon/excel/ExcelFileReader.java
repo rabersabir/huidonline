@@ -4,8 +4,10 @@ import com.huidonline.coupon.data.Address;
 import com.huidonline.coupon.data.Article;
 import com.huidonline.coupon.data.Customer;
 import com.huidonline.coupon.data.Order;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -35,10 +37,15 @@ public class ExcelFileReader {
             Iterator<Row> rowIterator = sheet.iterator();
             int index = 0;
             while (rowIterator.hasNext()) {
+
                 index++;
-                if (index != 1) {
-                    Row row = rowIterator.next();
-                    Order existingOrder = getOrderByOrderId(getCellValue(row, COL_ORDER_ID), orders);
+                Row row = rowIterator.next();
+
+                String newOrderId = getCellValue(row, COL_ORDER_ID);
+
+                if (index != 1 && newOrderId != null) {
+
+                    Order existingOrder = getOrderByOrderId(newOrderId, orders);
                     if (existingOrder != null) {
                         addArticles(existingOrder, row);
                     } else {
@@ -60,9 +67,7 @@ public class ExcelFileReader {
     }
 
     private static void addArticles(Order order, Row row) {
-        String produchtNaam = getCellValue(row, COL_PRODUCTNAAM);
-        System.out.println("product naam" + produchtNaam);
-        order.addArticles(new Article(getCellValue(row, COL_ARTIKELNUMMER), produchtNaam, null));
+        order.addArticles(new Article(getCellValue(row, COL_ARTIKELNUMMER), getCellValue(row, COL_PRODUCTNAAM), null));
     }
 
     private static Order getOrderByOrderId(String newOrderId, Set<Order> orders) {
@@ -109,17 +114,12 @@ public class ExcelFileReader {
         if (row == null) {
             return null;
         }
-        if (row.getCell(index) == null) {
+        Cell cell = row.getCell(index);
+
+        if (cell == null) {
             return null;
         }
-        if (row.getCell(index).getCellType() == Cell.CELL_TYPE_NUMERIC) {
-            return String.valueOf(row.getCell(index).getNumericCellValue());
-        } else if (row.getCell(index).getCellType() == Cell.CELL_TYPE_STRING) {
-            return row.getCell(index).getStringCellValue();
-        } else {
-            return "";
-        }
-
-
+        cell.setCellType(Cell.CELL_TYPE_STRING);
+        return cell.getStringCellValue();
     }
 }

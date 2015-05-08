@@ -36,6 +36,7 @@ import com.huidonline.coupon.excel.ExcelFileReader;
 import com.huidonline.coupon.excel.ExcelFileWriter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +69,17 @@ public class HuidOnlineExport extends JPanel
 
         //Create a file chooser
         fc = new JFileChooser();
+        FileFilter allFilter = new FileTypeFilter(".", "Alle bestanden");
 
+        FileFilter xlsFilter = new FileTypeFilter(".xls", "MS Excel");
+        FileFilter xlsmFilter = new FileTypeFilter(".xlsm", "MS Excel with macro");
+        FileFilter xlsxFilter = new FileTypeFilter(".xlsx", "MS Excel new");
+
+
+        fc.addChoosableFileFilter(allFilter);
+        fc.addChoosableFileFilter(xlsFilter);
+        fc.addChoosableFileFilter(xlsmFilter);
+        fc.addChoosableFileFilter(xlsxFilter);
         //Uncomment one of the following lines to try a different
         //file selection mode.  The first allows just directories
         //to be selected (and, at least in the Java look and feel,
